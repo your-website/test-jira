@@ -27,6 +27,7 @@ const NavBar = ({ githubRepo }) => {
   }
 
   function openMenu() {
+    console.log(menu);
     setMenu(!menu);
     setDisplay(!display);
   }
@@ -38,6 +39,7 @@ const NavBar = ({ githubRepo }) => {
       </LinkLogo>
       <Container
         className="container"
+        asd
         style={{ transform: display ? "translateX(100%)" : "translateX(0)" }}
       >
         <Ul>

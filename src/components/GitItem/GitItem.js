@@ -5,6 +5,9 @@ import {
   Img,
   Test,
   ParagraphBold,
+  Link,
+  ButtonRepo,
+  ButtonAbout,
 } from "./styles_GitItem";
 
 const GitItem = ({ githubRepo }) => {
@@ -35,7 +38,10 @@ const GitItem = ({ githubRepo }) => {
         <ParagraphBold>login</ParagraphBold>
         <Paragraph>{login}</Paragraph>
       </Test>
-      <a href={linkUser}>click</a>
+      <ButtonAbout>Show more</ButtonAbout>
+      <ButtonRepo>
+        <Link href={linkUser}>Repositories</Link>
+      </ButtonRepo>
     </Container>
   );
 };
