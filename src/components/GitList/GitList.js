@@ -4,19 +4,40 @@ import { Container } from "./styles_GitList";
 
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
+import GithubService from "../../services/GithubService";
+import { githubRepoRequested, requestGutHubRepo } from "../../actions";
 
-const GitList = ({ githubRepo }) => {
+const GitList = ({
+  githubRepo,
+  githubRepoRequested,
+  requestGutHubRepo,
+  loading,
+}) => {
+  async function test() {
+    requestGutHubRepo();
+    const test = await GithubService.getRepositories();
+    githubRepoRequested(test);
+  }
+
   return (
-    <Container className="gitList">
-      <h3>GitList</h3>
-      <GitItem githubRepo={githubRepo} />
-      <PaginationList />
-    </Container>
+    <div>
+      <Container className="gitList">
+        <h3>GitList</h3>
+        <GitItem loading={loading} githubRepo={githubRepo} />
+        <PaginationList />
+      </Container>
+      <button onClick={test}>Click</button>
+    </div>
   );
 };
 
-const mapStateToProps = ({ githubRepo }) => {
-  return githubRepo;
+const mapStateToProps = ({ githubRepo, loading }) => {
+  return { githubRepo, loading };
 };
 
-export default connect(mapStateToProps)(GitList);
+const mapDispatchToProps = {
+  githubRepoRequested,
+  requestGutHubRepo,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(GitList);

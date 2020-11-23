@@ -1,6 +1,7 @@
 const githubRepo = (state, action) => {
   if (state === undefined) {
     return {
+      loading: false,
       githubRepo: [
         {
           id: 876667,
@@ -19,10 +20,15 @@ const githubRepo = (state, action) => {
 
   switch (action.type) {
     case "SET_GITHUB_REPO":
-      console.log("action.payload");
-      console.log(action.payload);
       return {
+        loading: false,
         githubRepo: action.payload,
+      };
+
+    case "REQUEST_GITHUB_REPO":
+      return {
+        loading: true,
+        githubRepo: state.githubRepo.githubRepo,
       };
 
     default:

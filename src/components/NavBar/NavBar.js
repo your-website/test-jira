@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import {
   Nav,
   Logo,
@@ -15,21 +13,12 @@ import {
 
 import logo from "../../static/logo.svg";
 import BurgerMenu from "../BurgerMenu";
-import GithubService from "../../services/GithubService";
-import { githubRepoRequested } from "../../actions";
-const NavBar = ({ githubRepo, githubRepoRequested }) => {
+
+const NavBar = () => {
   const [menu, setMenu] = useState(true);
   const [display, setDisplay] = useState(true);
 
-  async function test() {
-    const test = await GithubService.getRepositories();
-    console.log(test);
-    githubRepoRequested(test);
-    console.log(githubRepo);
-  }
-
   function openMenu() {
-    console.log(menu);
     setMenu(!menu);
     setDisplay(!display);
   }
@@ -54,8 +43,6 @@ const NavBar = ({ githubRepo, githubRepoRequested }) => {
         </Ul>
         <Button>Login</Button>
       </Container>
-      {/* {githubRepo.name} */}
-      <button onClick={test}>Click</button>
       <ContainerBurgerMenu className="ContainerBurgerMenu" onClick={openMenu}>
         <BurgerMenu menu={menu} />
       </ContainerBurgerMenu>
@@ -67,8 +54,4 @@ const mapStateToProps = ({ githubRepo }) => {
   return githubRepo;
 };
 
-const mapDispatchToProps = {
-  githubRepoRequested,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default NavBar;

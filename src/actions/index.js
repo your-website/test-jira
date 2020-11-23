@@ -1,12 +1,16 @@
 const githubRepoRequested = (newRepo) => {
   const { data } = newRepo;
   const { items } = data;
-  console.log("actions");
-  console.log(items);
   return {
     type: "SET_GITHUB_REPO",
     payload: items,
   };
 };
 
-export { githubRepoRequested };
+const requestGutHubRepo = () => {
+  return {
+    type: "REQUEST_GITHUB_REPO",
+  };
+};
+
+export { githubRepoRequested, requestGutHubRepo };
