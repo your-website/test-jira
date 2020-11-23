@@ -21,8 +21,14 @@ const PaginationList = ({
 
   const linksPage = [];
 
-  for (let i = page; i < page + 5; i++) {
-    linksPage.push(i);
+  if (page >= 3) {
+    for (let i = page - 2; i < page + 3; i++) {
+      linksPage.push(i);
+    }
+  } else {
+    for (let i = 1; i < page + 5; i++) {
+      linksPage.push(i);
+    }
   }
 
   async function funcData(e, ee) {
@@ -55,6 +61,17 @@ const PaginationList = ({
     <Container>
       {prevButton}
       {linksPage.map((link) => {
+        if (link === page) {
+          return (
+            <Paragraph
+              style={{ textDecoration: "underline", color: "blue" }}
+              onClick={() => setPage(link)}
+              key={link}
+            >
+              {link}
+            </Paragraph>
+          );
+        }
         return (
           <Paragraph onClick={() => setPage(link)} key={link}>
             {link}
