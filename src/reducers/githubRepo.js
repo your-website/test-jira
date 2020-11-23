@@ -2,7 +2,7 @@ const githubRepo = (state, action) => {
   if (state === undefined) {
     return {
       loading: false,
-      githubRepo: [
+      data: [
         {
           id: 876667,
           forks: 161,
@@ -22,13 +22,13 @@ const githubRepo = (state, action) => {
     case "SET_GITHUB_REPO":
       return {
         loading: false,
-        githubRepo: action.payload,
+        data: action.payload,
       };
 
     case "REQUEST_GITHUB_REPO":
       return {
         loading: true,
-        githubRepo: state.githubRepo.githubRepo,
+        data: state.githubRepo.data,
       };
 
     default:

@@ -10,8 +10,8 @@ import {
   ButtonAbout,
 } from "./styles_GitItem";
 
-const GitItem = ({ githubRepo }, loading) => {
-  const test = githubRepo.githubRepo.map((ele) => {
+const GitItem = ({ loading, githubRepoData }) => {
+  const test = githubRepoData.map((ele) => {
     const { id, forks, name, size, watchers, owner } = ele;
     const { avatar_url, login } = owner;
     const linkUser = `https://github.com/${login}`;
@@ -47,7 +47,7 @@ const GitItem = ({ githubRepo }, loading) => {
     );
   });
 
-  if (githubRepo.loading) {
+  if (loading) {
     return <p>loading</p>;
   } else {
     return test;

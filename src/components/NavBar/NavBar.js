@@ -50,8 +50,4 @@ const NavBar = () => {
   );
 };
 
-const mapStateToProps = ({ githubRepo }) => {
-  return githubRepo;
-};
-
 export default NavBar;

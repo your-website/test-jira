@@ -7,12 +7,8 @@ import PaginationList from "../PaginationList";
 import GithubService from "../../services/GithubService";
 import { githubRepoRequested, requestGutHubRepo } from "../../actions";
 
-const GitList = ({
-  githubRepo,
-  githubRepoRequested,
-  requestGutHubRepo,
-  loading,
-}) => {
+const GitList = ({ githubRepo, githubRepoRequested, requestGutHubRepo }) => {
+  const { data, loading } = githubRepo;
   async function test() {
     requestGutHubRepo();
     const test = await GithubService.getRepositories();
@@ -23,7 +19,7 @@ const GitList = ({
     <div>
       <Container className="gitList">
         <h3>GitList</h3>
-        <GitItem loading={loading} githubRepo={githubRepo} />
+        <GitItem loading={loading} githubRepoData={data} />
         <PaginationList />
       </Container>
       <button onClick={test}>Click</button>
@@ -31,8 +27,8 @@ const GitList = ({
   );
 };
 
-const mapStateToProps = ({ githubRepo, loading }) => {
-  return { githubRepo, loading };
+const mapStateToProps = (githubRepo) => {
+  return githubRepo;
 };
 
 const mapDispatchToProps = {
