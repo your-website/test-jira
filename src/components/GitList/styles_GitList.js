@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ButtonShadow } from "../../assets/styled";
 
 const Container = styled.div`
   display: flex;
@@ -13,4 +14,9 @@ const Container = styled.div`
   }
 `;
 
-export { Container };
+const ButtonShow = styled(ButtonShadow)`
+  width: 120px;
+  height: 20px;
+`;
+
+export { Container, ButtonShow };

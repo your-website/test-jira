@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://api.github.com/search/repositories?q=page=1&per_page=10",
+  baseURL: "https://api.github.com",
   withCredentials: false,
   headers: {
     Accept: "application/json",
@@ -11,7 +11,7 @@ const apiClient = axios.create({
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  getRepositories() {
-    return apiClient.get();
+  getRepositories(page, perPage) {
+    return apiClient.get(`/search/repositories?q=page=${page}`);
   },
 };
