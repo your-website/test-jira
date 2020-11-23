@@ -4,6 +4,7 @@ import {
   setCurrentPage,
   setGithubRepo,
   requestGitHubRepo,
+  showMoreRepo,
 } from "../../actions";
 import GithubService from "../../services/GithubService";
 
@@ -14,6 +15,7 @@ const PaginationList = ({
   setCurrentPage,
   setGithubRepo,
   requestGitHubRepo,
+  showMoreRepo,
 }) => {
   const { page, perPage } = currentPage;
 
@@ -39,6 +41,7 @@ const PaginationList = ({
   }
 
   function setPage(action) {
+    showMoreRepo(1);
     if (action === "next") {
       let count = page + 1;
       setCurrentPage(count);
@@ -92,6 +95,7 @@ const mapDispatchToProps = {
   setCurrentPage,
   setGithubRepo,
   requestGitHubRepo,
+  showMoreRepo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PaginationList);

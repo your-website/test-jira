@@ -10,7 +10,7 @@ import {
   ButtonAbout,
 } from "./styles_GitItem";
 
-const GitItem = ({ loading, githubRepoData }) => {
+const GitItem = ({ loading, githubRepoData, countRepo }) => {
   const test = githubRepoData.map((ele) => {
     const { id, forks, name, size, watchers, owner } = ele;
     const { avatar_url, login } = owner;
@@ -47,10 +47,17 @@ const GitItem = ({ loading, githubRepoData }) => {
     );
   });
 
+  const showCurrentRepo = test.map((ele, index) => {
+    const a = countRepo * 10;
+    if (index < a) {
+      return ele;
+    }
+  });
+
   if (loading) {
     return <p>loading</p>;
   } else {
-    return test;
+    return showCurrentRepo;
   }
 };
 

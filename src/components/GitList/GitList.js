@@ -5,28 +5,30 @@ import { Container, ButtonShow } from "./styles_GitList";
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
 import GithubService from "../../services/GithubService";
-import { setGithubRepo, requestGitHubRepo } from "../../actions";
+import { showMoreRepo, loadingData } from "../../actions";
 
-const GitList = ({
-  currentPage,
-  githubRepo,
-  setGithubRepo,
-  requestGitHubRepo,
-}) => {
-  const { page, perPage } = currentPage;
-  const { data, loading } = githubRepo;
+const GitList = ({ githubRepo, showMoreRepo, loadingData }) => {
+  const { data, loading, showMore } = githubRepo;
+  console.log(showMore);
+
   async function test() {
-    requestGitHubRepo();
-    const data = await GithubService.getRepositories(page, perPage);
-    setGithubRepo(data);
+    loadingData();
+    if (showMore === 3) {
+      return;
+    }
+    const count = showMore + 1;
+    showMoreRepo(count);
   }
+
+  const Button =
+    showMore < 3 ? <ButtonShow onClick={test}>Show more</ButtonShow> : null;
 
   return (
     <div>
       <Container className="gitList">
         <h3>GitList</h3>
-        <GitItem loading={loading} githubRepoData={data} />
-        <ButtonShow onClick={test}>Show more</ButtonShow>
+        <GitItem countRepo={showMore} loading={loading} githubRepoData={data} />
+        {Button}
         <PaginationList />
       </Container>
     </div>
@@ -38,8 +40,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setGithubRepo,
-  requestGitHubRepo,
+  showMoreRepo,
+  loadingData,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GitList);

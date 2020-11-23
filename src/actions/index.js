@@ -20,4 +20,23 @@ const setCurrentPage = (page) => {
   };
 };
 
-export { setGithubRepo, requestGitHubRepo, setCurrentPage };
+const showMoreRepo = (show) => {
+  return {
+    type: "SHOW_MORE_REPO",
+    payload: show,
+  };
+};
+
+const loadingData = () => {
+  return {
+    type: "LOADING_DATA",
+  };
+};
+
+export {
+  setGithubRepo,
+  requestGitHubRepo,
+  setCurrentPage,
+  showMoreRepo,
+  loadingData,
+};
