@@ -1,12 +1,18 @@
 import "./App.css";
 import NavBar from "./components/NavBar";
+import GitList from "./components/GitList";
+import FooterPage from "./components/FooterPage";
+
 function App() {
   return (
     <div className="App">
-      <NavBar />
       <header className="App-header">
-        <h1>Hello world</h1>
+        <NavBar />
       </header>
+      <main>
+        <GitList />
+      </main>
+      <FooterPage />
     </div>
   );
 }

@@ -9,11 +9,11 @@ const NavBar = ({ githubRepo }) => {
     console.log(test);
   }
   return (
-    <div>
+    <nav className="nav">
       <h1>hello</h1>
-      {githubRepo.id}
+      {githubRepo.name}
       <button onClick={test}>Click</button>
-    </div>
+    </nav>
   );
 };
 
