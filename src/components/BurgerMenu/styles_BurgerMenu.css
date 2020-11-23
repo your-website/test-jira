@@ -1,5 +1,5 @@
 .menu-btn {
-  display: block;
+  display: none;
   width: 50px;
   height: 50px;
   background-color: #fff;
@@ -19,26 +19,34 @@
   height: 2px;
   background-color: #222;
 }
-.menu-btn span::before,
+.menu-btn span::before {
+  content: "";
+  display: block;
+  transition: 0.2s;
+  transform: rotate(35deg) translateX(8px) translateY(-9px);
+  width: 10px;
+  transform-origin: top bottom;
+}
 .menu-btn span::after {
   content: "";
   display: block;
   transition: 0.2s;
-}
-.menu-btn span::before {
-  transform: translateY(-5px);
-}
-.menu-btn span::after {
-  transform: translateY(5px);
+  transform: rotate(-35deg) translateX(9px) translateY(6px);
+  width: 11px;
+  transform-origin: right bottom;
 }
 
 .menu-btn_active span:before {
-  transform: rotate(-35deg);
-  width: 10px;
+  transform: rotate(35deg) translateX(0) translateY(0);
   transform-origin: left bottom;
 }
 .menu-btn_active span:after {
-  transform: rotate(35deg);
-  width: 10px;
+  transform: rotate(-35deg) translateX(0) translateY(0);
   transform-origin: left top;
+}
+
+@media screen and (max-width: 500px) {
+  .menu-btn {
+    display: block;
+  }
 }

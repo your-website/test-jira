@@ -1,13 +1,25 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
-import { Nav, Logo, Li, Link, Ul, LinkLogo, Button } from "./styles_NavBar";
+import {
+  Nav,
+  Logo,
+  Li,
+  Link,
+  Ul,
+  LinkLogo,
+  Button,
+  Container,
+  ContainerBurgerMenu,
+} from "./styles_NavBar";
+
 import logo from "../../static/logo.svg";
 import BurgerMenu from "../BurgerMenu";
 import GithubService from "../../services/GithubService";
 
 const NavBar = ({ githubRepo }) => {
-  const [menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(true);
+  const [display, setDisplay] = useState(true);
 
   async function test() {
     const test = await GithubService.getRepositories();
@@ -16,6 +28,7 @@ const NavBar = ({ githubRepo }) => {
 
   function openMenu() {
     setMenu(!menu);
+    setDisplay(!display);
   }
 
   return (
@@ -23,20 +36,25 @@ const NavBar = ({ githubRepo }) => {
       <LinkLogo href="">
         <Logo src={logo} alt="" />
       </LinkLogo>
-      <Ul>
-        <Li>
-          <Link href="">Home</Link>
-        </Li>
-        <Li>
-          <Link href="">GitHub List</Link>
-        </Li>
-      </Ul>
-      <Button>Login</Button>
+      <Container
+        className="container"
+        style={{ transform: display ? "translateX(100%)" : "translateX(0)" }}
+      >
+        <Ul>
+          <Li>
+            <Link href="">Home</Link>
+          </Li>
+          <Li>
+            <Link href="">GitHub List</Link>
+          </Li>
+        </Ul>
+        <Button>Login</Button>
+      </Container>
       {/* {githubRepo.name} */}
       {/* <button onClick={test}>Click</button> */}
-      <div onClick={openMenu}>
+      <ContainerBurgerMenu className="ContainerBurgerMenu" onClick={openMenu}>
         <BurgerMenu menu={menu} />
-      </div>
+      </ContainerBurgerMenu>
     </Nav>
   );
 };
