@@ -1,12 +1,23 @@
 import React from "react";
 import { connect } from "react-redux";
+import {
+  setCurrentPage,
+  setGithubRepo,
+  requestGitHubRepo,
+} from "../../actions";
+import GithubService from "../../services/GithubService";
 
-import { Container, Button, Link } from "./styles_Pagination";
+import { Container, Button, Paragraph } from "./styles_Pagination";
 
-const PaginationList = ({ currentPage }) => {
-  const { page } = currentPage;
+const PaginationList = ({
+  currentPage,
+  setCurrentPage,
+  setGithubRepo,
+  requestGitHubRepo,
+}) => {
+  const { page, perPage } = currentPage;
 
-  const moreLinks = <Link href="">...</Link>;
+  const moreLinks = <Paragraph href="">...</Paragraph>;
 
   const linksPage = [];
 
@@ -14,20 +25,44 @@ const PaginationList = ({ currentPage }) => {
     linksPage.push(i);
   }
 
-  console.log(linksPage);
+  async function funcData(e, ee) {
+    requestGitHubRepo();
+    const data = await GithubService.getRepositories(e, ee);
+    console.log(data);
+    setGithubRepo(data);
+  }
+
+  function setPage(action) {
+    if (action === "next") {
+      let count = page + 1;
+      setCurrentPage(count);
+      funcData(count, perPage);
+    } else if (action === "prev") {
+      let count = page - 1;
+      setCurrentPage(count);
+      funcData(count, perPage);
+    } else {
+      let count = action;
+      setCurrentPage(count);
+      funcData(count, perPage);
+    }
+  }
+
+  const prevButton =
+    page === 1 ? null : <Button onClick={() => setPage("prev")}>prev</Button>;
 
   return (
     <Container>
-      <Button>prev</Button>
+      {prevButton}
       {linksPage.map((link) => {
         return (
-          <Link key={link} href="">
+          <Paragraph onClick={() => setPage(link)} key={link}>
             {link}
-          </Link>
+          </Paragraph>
         );
       })}
       {moreLinks}
-      <Button>next</Button>
+      <Button onClick={() => setPage("next")}>next</Button>
     </Container>
   );
 };
@@ -35,4 +70,11 @@ const PaginationList = ({ currentPage }) => {
 const mapStateToProps = (state) => {
   return state;
 };
-export default connect(mapStateToProps)(PaginationList);
+
+const mapDispatchToProps = {
+  setCurrentPage,
+  setGithubRepo,
+  requestGitHubRepo,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(PaginationList);

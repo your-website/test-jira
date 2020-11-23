@@ -5,20 +5,20 @@ import { Container, ButtonShow } from "./styles_GitList";
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
 import GithubService from "../../services/GithubService";
-import { githubRepoRequested, requestGutHubRepo } from "../../actions";
+import { setGithubRepo, requestGitHubRepo } from "../../actions";
 
 const GitList = ({
   currentPage,
   githubRepo,
-  githubRepoRequested,
-  requestGutHubRepo,
+  setGithubRepo,
+  requestGitHubRepo,
 }) => {
   const { page, perPage } = currentPage;
   const { data, loading } = githubRepo;
   async function test() {
-    requestGutHubRepo();
+    requestGitHubRepo();
     const data = await GithubService.getRepositories(page, perPage);
-    githubRepoRequested(data);
+    setGithubRepo(data);
   }
 
   return (
@@ -38,8 +38,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  githubRepoRequested,
-  requestGutHubRepo,
+  setGithubRepo,
+  requestGitHubRepo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GitList);

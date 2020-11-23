@@ -14,7 +14,7 @@ const currentPage = (state, action) => {
       };
 
     default:
-      return state.githubRepo;
+      return state.currentPage;
   }
 };
 
