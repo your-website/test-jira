@@ -1,11 +1,10 @@
 import React from "react";
-import { Button, Footer } from "./styles_FooterPage";
+import { Footer, Paragraph } from "./styles_FooterPage";
 
 const FooterPage = () => {
   return (
     <Footer>
-      <h4>FooterPage</h4>
-      <Button>Click me</Button>
+      <Paragraph>Copyright</Paragraph>
     </Footer>
   );
 };

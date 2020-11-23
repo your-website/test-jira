@@ -5,6 +5,10 @@ const Paragraph = styled.p`
   margin: 0;
 `;
 
+const ParagraphBold = styled(Paragraph)`
+  font-weight: bold;
+`;
+
 const Test = styled.div`
   display: flex;
   flex-direction: column;
@@ -21,6 +25,7 @@ const Container = styled.div`
 const Img = styled.img`
   width: 80px;
   height: auto;
+  padding: 5px 0;
 `;
 
-export { Paragraph, Container, Img, Test };
+export { Paragraph, Container, Img, Test, ParagraphBold };

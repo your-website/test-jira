@@ -1,16 +1,18 @@
 import styled from "styled-components";
 
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  margin: 0 1em;
-  padding: 0.25em 1em;
-`;
-
 const Footer = styled.footer`
+  margin: 0;
   background: #282c34;
+  height: 10vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
-export { Button, Footer };
+const Paragraph = styled.p`
+  margin: 0 0 0 1rem;
+  color: white;
+  font-size: 14px;
+`;
+
+export { Paragraph, Footer };

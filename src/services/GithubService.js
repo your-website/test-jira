@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "https://api.github.com/search/repositories?q=page=1&per_page=3",
+  baseURL: "https://api.github.com/search/repositories?q=page=1&per_page=10",
   withCredentials: false,
   headers: {
     Accept: "application/json",

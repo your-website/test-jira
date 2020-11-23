@@ -1,5 +1,11 @@
 import React from "react";
-import { Paragraph, Container, Img, Test } from "./styles_GitItem";
+import {
+  Paragraph,
+  Container,
+  Img,
+  Test,
+  ParagraphBold,
+} from "./styles_GitItem";
 
 const GitItem = ({ githubRepo }) => {
   const { id, forks, name, size, watchers, owner } = githubRepo;
@@ -9,25 +15,26 @@ const GitItem = ({ githubRepo }) => {
   return (
     <Container className="gitItem">
       <Img src={avatar_url} alt={name}></Img>
-      <Test className="test">
-        <Paragraph>id</Paragraph>
+      <Test>
+        <ParagraphBold>id</ParagraphBold>
         <Paragraph>{id}</Paragraph>
       </Test>
-      <Paragraph>
-        forks <br /> {forks}
-      </Paragraph>
-      <Paragraph>
-        name <br /> {name}
-      </Paragraph>
-      <Paragraph>
-        size <br /> {size}
-      </Paragraph>
-      <Paragraph>
-        watchers <br /> {watchers}
-      </Paragraph>
-      <Paragraph>
-        login <br /> {login}
-      </Paragraph>
+      <Test>
+        <ParagraphBold>forks</ParagraphBold>
+        <Paragraph>{forks}</Paragraph>
+      </Test>
+      <Test>
+        <ParagraphBold>size</ParagraphBold>
+        <Paragraph>{size}</Paragraph>
+      </Test>
+      <Test>
+        <ParagraphBold>watchers</ParagraphBold>
+        <Paragraph>{watchers}</Paragraph>
+      </Test>
+      <Test>
+        <ParagraphBold>login</ParagraphBold>
+        <Paragraph>{login}</Paragraph>
+      </Test>
       <a href={linkUser}>click</a>
     </Container>
   );
