@@ -53,7 +53,7 @@ const NavBar = ({ githubRepo }) => {
         <Button>Login</Button>
       </Container>
       {/* {githubRepo.name} */}
-      {/* <button onClick={test}>Click</button> */}
+      <button onClick={test}>Click</button>
       <ContainerBurgerMenu className="ContainerBurgerMenu" onClick={openMenu}>
         <BurgerMenu menu={menu} />
       </ContainerBurgerMenu>
