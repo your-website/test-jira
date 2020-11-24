@@ -1,11 +1,11 @@
 import React from "react";
-import "./styles_BurgerMenu.css";
+import { MenuBtn, Span } from "./style";
 
 const BurgerMenu = ({ menu }) => {
   return (
-    <div className={menu ? "menu-btn menu-btn_active" : "menu-btn"}>
-      <span></span>
-    </div>
+    <MenuBtn className={menu ? "menu-btn menu-btn_active" : "menu-btn"}>
+      <Span className={menu ? "active" : null}></Span>
+    </MenuBtn>
   );
 };
 
