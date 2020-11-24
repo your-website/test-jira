@@ -24,19 +24,22 @@ class GitList extends Component {
 
   render() {
     const { githubRepo } = this.props;
-    const { data, loading, showMore } = githubRepo;
     // showMore - how many results to show. max 30 repPage
+    const { data, loading, showMore } = githubRepo;
+    const showResults = data.slice(0, showMore * 10);
+    const moreResults = showMore + 1;
+    const hideResults = showMore - 2;
 
     const Button =
       showMore < 3 ? (
         <ButtonShow
-          onClick={() => this.showOrHideDataInPage(3, showMore + 1, showMore)}
+          onClick={() => this.showOrHideDataInPage(3, moreResults, showMore)}
         >
           Show more
         </ButtonShow>
       ) : (
         <ButtonShow
-          onClick={() => this.showOrHideDataInPage(1, showMore - 2, showMore)}
+          onClick={() => this.showOrHideDataInPage(1, hideResults, showMore)}
         >
           Hide
         </ButtonShow>
@@ -50,7 +53,7 @@ class GitList extends Component {
             Sort of: <span>default</span>
             <span>stars</span>
           </p>
-          <GitItem countRepo={showMore} loading={loading} data={data} />
+          <GitItem loading={loading} data={showResults} />
           {Button}
           <PaginationList />
         </Container>

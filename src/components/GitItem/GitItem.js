@@ -11,18 +11,11 @@ import {
   Link,
 } from "./style";
 
-const GitItem = ({ loading, data, countRepo }) => {
-  const showCurrentRepositories = renderRepositories(data).map((ele, index) => {
-    const a = countRepo * 10;
-    if (index < a) {
-      return ele;
-    } else return null;
-  });
-
+const GitItem = ({ loading, data }) => {
   if (loading) {
     return <p>loading</p>;
   } else {
-    return showCurrentRepositories;
+    return renderRepositories(data);
   }
 };
 
