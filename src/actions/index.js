@@ -13,13 +13,6 @@ const requestGitHubRepo = () => {
   };
 };
 
-const setCurrentPage = (page) => {
-  return {
-    type: "SET_CURRENT_PAGE",
-    payload: page,
-  };
-};
-
 const showMoreRepo = (show) => {
   return {
     type: "SHOW_MORE_REPO",
@@ -33,10 +26,4 @@ const loadingData = () => {
   };
 };
 
-export {
-  setGithubRepo,
-  requestGitHubRepo,
-  setCurrentPage,
-  showMoreRepo,
-  loadingData,
-};
+export { setGithubRepo, requestGitHubRepo, showMoreRepo, loadingData };

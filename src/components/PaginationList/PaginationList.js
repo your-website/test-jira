@@ -1,41 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  setCurrentPage,
-  setGithubRepo,
-  requestGitHubRepo,
-  showMoreRepo,
-} from "../../actions";
+import { setGithubRepo, requestGitHubRepo, showMoreRepo } from "../../actions";
 
 import { uuid, compose, paginationPages } from "../../utils";
 import withRequestRepo from "../hoc/withRequestRepo";
-
+import { withRouter } from "react-router-dom";
 import { Button, Container, Paragraph } from "./style";
 
 class PaginationList extends Component {
-  getNewRepo(count) {
+  async getNewRepo(count) {
     const {
       requestGitHubRepo,
       setGithubRepo,
       sortOfRepositories,
       newRepositories,
       currentPage: { perPage },
+      history,
     } = this.props;
 
     // prop from withRequestRepo HOC
-    newRepositories(count, perPage, {
+    await newRepositories(count, perPage, {
       requestGitHubRepo,
       setGithubRepo,
       sortOfRepositories,
     });
+    history.push(`/gitlist/${count}`);
   }
 
   setPage(action) {
-    const {
-      showMoreRepo,
-      setCurrentPage,
-      currentPage: { page },
-    } = this.props;
+    const { showMoreRepo, itemId } = this.props;
     const updatePage = 1;
 
     // show 10 repositories when person open new page
@@ -43,44 +36,42 @@ class PaginationList extends Component {
 
     // go to the desired page
     if (action === "next") {
-      let count = page + 1;
-      setCurrentPage(count);
+      const count = itemId + 1;
       this.getNewRepo(count);
     } else if (action === "prev") {
-      let count = page - 1;
-      setCurrentPage(count);
+      const count = itemId - 1;
       this.getNewRepo(count);
     } else {
-      setCurrentPage(action);
       this.getNewRepo(action);
     }
   }
 
   render() {
     const {
-      currentPage: { page },
       githubRepo: { totalCount },
+      itemId,
     } = this.props;
     const maxPage = Math.ceil(totalCount / 30); // Default one page = 30 results.
-    const linksPage = paginationPages(page, maxPage);
+    const itemPage = itemId;
+    const linksPage = paginationPages(itemPage, maxPage);
 
     const prevButton =
-      page === 1 ? null : (
+      itemPage === 1 ? null : (
         <Button onClick={() => this.setPage("prev")}>prev</Button>
       );
 
     const nextButton =
-      page > maxPage ? null : (
+      itemPage > maxPage ? null : (
         <Button onClick={() => this.setPage("next")}>next</Button>
       );
 
     const moreLinks =
-      page < maxPage ? <Paragraph href="">...</Paragraph> : null;
+      itemPage < maxPage ? <Paragraph href="">...</Paragraph> : null;
 
     const renderRepo = linksPage.map((link) => {
       const key = uuid();
 
-      if (link === page) {
+      if (link === itemPage) {
         return (
           <Paragraph
             style={{ textDecoration: "underline", color: "blue" }}
@@ -114,7 +105,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  setCurrentPage,
   setGithubRepo,
   requestGitHubRepo,
   showMoreRepo,
@@ -123,4 +113,4 @@ const mapDispatchToProps = {
 export default compose(
   withRequestRepo(),
   connect(mapStateToProps, mapDispatchToProps)
-)(PaginationList);
+)(withRouter(PaginationList));

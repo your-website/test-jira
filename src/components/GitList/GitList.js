@@ -10,6 +10,7 @@ import {
 import { Container, ButtonShow, Paragraph, Span } from "./style";
 import { compose } from "../../utils";
 import withRequestRepo from "../hoc/withRequestRepo";
+import { withRouter } from "react-router-dom";
 
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
@@ -18,6 +19,11 @@ class GitList extends Component {
   state = {
     sortOfRepositories: null,
   };
+
+  componentDidMount() {
+    const { history } = this.props;
+    history.push(`/gitlist/1`);
+  }
 
   // maxValue no more than 30
   showOrHideDataInPage(maxValue, value, currentValue) {
@@ -35,10 +41,11 @@ class GitList extends Component {
 
   sortRepo = async (e) => {
     const {
-      currentPage,
+      currentPage: { perPage },
       setGithubRepo,
       requestGitHubRepo,
       newRepositories,
+      itemId,
     } = this.props;
 
     const value = e.target.textContent;
@@ -48,7 +55,7 @@ class GitList extends Component {
     } else this.setState({ sortOfRepositories: value });
 
     // prop from withRequestRepo HOC
-    newRepositories(currentPage.page, currentPage.perPage, {
+    newRepositories(itemId, perPage, {
       requestGitHubRepo,
       setGithubRepo,
       sortOfRepositories: value,
@@ -59,6 +66,7 @@ class GitList extends Component {
     const { sortOfRepositories } = this.state;
     const {
       githubRepo: { data, loading, showMore },
+      itemId,
     } = this.props;
 
     // showMore - how many results to show. max 30 repPage
@@ -100,9 +108,12 @@ class GitList extends Component {
               stars
             </Span>
           </Paragraph>
-          <GitItem loading={loading} data={showResults} />
+          <GitItem itemId={itemId} loading={loading} data={showResults} />
           {Button}
-          <PaginationList sortOfRepositories={sortOfRepositories} />
+          <PaginationList
+            itemId={itemId}
+            sortOfRepositories={sortOfRepositories}
+          />
         </Container>
       </div>
     );
@@ -123,4 +134,4 @@ const mapDispatchToProps = {
 export default compose(
   withRequestRepo(),
   connect(mapStateToProps, mapDispatchToProps)
-)(GitList);
+)(withRouter(GitList));

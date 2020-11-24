@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import { Link as RouterLink } from "react-router-dom";
 import {
   Nav,
   Container,
@@ -36,10 +36,14 @@ class NavBar extends Component {
         <Container className={closeMenu ? "container" : "container active"}>
           <Ul>
             <Li>
-              <Link href="">Home</Link>
+              <RouterLink className="router_link" to="/">
+                Home
+              </RouterLink>
             </Li>
             <Li>
-              <Link href="">GitHub List</Link>
+              <RouterLink className="router_link" to="/gitlist/:id">
+                GitHub List
+              </RouterLink>
             </Li>
           </Ul>
           <Button>Login</Button>
