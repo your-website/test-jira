@@ -52,26 +52,25 @@ class PaginationList extends Component {
       itemId,
     } = this.props;
     const maxPage = Math.ceil(totalCount / 30); // Default one page = 30 results.
-    const itemPage = itemId;
-    const linksPage = paginationPages(itemPage, maxPage);
+    const linksPage = paginationPages(itemId, maxPage);
 
     const prevButton =
-      itemPage === 1 ? null : (
+      itemId === 1 ? null : (
         <Button onClick={() => this.setPage("prev")}>prev</Button>
       );
 
     const nextButton =
-      itemPage > maxPage ? null : (
+      itemId > maxPage ? null : (
         <Button onClick={() => this.setPage("next")}>next</Button>
       );
 
     const moreLinks =
-      itemPage < maxPage ? <Paragraph href="">...</Paragraph> : null;
+      itemId < maxPage ? <Paragraph href="">...</Paragraph> : null;
 
     const renderRepo = linksPage.map((link) => {
       const key = uuid();
 
-      if (link === itemPage) {
+      if (link === itemId) {
         return (
           <Paragraph
             style={{ textDecoration: "underline", color: "blue" }}

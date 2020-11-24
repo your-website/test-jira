@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link as RouterLink } from "react-router-dom";
 import {
   Nav,
   Container,
   ContainerBurgerMenu,
   Button,
-  Link,
+  NavLink,
   Logo,
   Li,
   Ul,
@@ -36,14 +35,14 @@ class NavBar extends Component {
         <Container className={closeMenu ? "container" : "container active"}>
           <Ul>
             <Li>
-              <RouterLink className="router_link" to="/">
+              <NavLink className="router_link" to="/">
                 Home
-              </RouterLink>
+              </NavLink>
             </Li>
             <Li>
-              <RouterLink className="router_link" to="/gitlist/:id">
+              <NavLink className="router_link" to="/gitlist/:id">
                 GitHub List
-              </RouterLink>
+              </NavLink>
             </Li>
           </Ul>
           <Button>Login</Button>
