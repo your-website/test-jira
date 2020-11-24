@@ -11,8 +11,23 @@ import {
   Link,
 } from "./style";
 
-const GitItem = ({ loading, githubRepoData, countRepo }) => {
-  const test = githubRepoData.map((ele) => {
+const GitItem = ({ loading, data, countRepo }) => {
+  const showCurrentRepositories = renderRepositories(data).map((ele, index) => {
+    const a = countRepo * 10;
+    if (index < a) {
+      return ele;
+    } else return null;
+  });
+
+  if (loading) {
+    return <p>loading</p>;
+  } else {
+    return showCurrentRepositories;
+  }
+};
+
+function renderRepositories(data) {
+  const page = data.map((ele) => {
     const { id, forks, name, size, watchers, owner } = ele;
     const { avatar_url, login } = owner;
     const linkUser = `https://github.com/${login}`;
@@ -48,18 +63,7 @@ const GitItem = ({ loading, githubRepoData, countRepo }) => {
     );
   });
 
-  const showCurrentRepo = test.map((ele, index) => {
-    const a = countRepo * 10;
-    if (index < a) {
-      return ele;
-    }
-  });
-
-  if (loading) {
-    return <p>loading</p>;
-  } else {
-    return showCurrentRepo;
-  }
-};
+  return page;
+}
 
 export default GitItem;

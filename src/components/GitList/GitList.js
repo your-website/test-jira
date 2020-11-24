@@ -26,7 +26,7 @@ const GitList = ({ githubRepo, showMoreRepo, loadingData }) => {
     <div>
       <Container className="gitList">
         <h3>GitList</h3>
-        <GitItem countRepo={showMore} loading={loading} githubRepoData={data} />
+        <GitItem countRepo={showMore} loading={loading} data={data} />
         {Button}
         <PaginationList />
       </Container>
