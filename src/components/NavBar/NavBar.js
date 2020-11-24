@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 
 import {
   Nav,
@@ -15,53 +15,63 @@ import {
 import logo from "../../static/logo.svg";
 import BurgerMenu from "../BurgerMenu";
 
-const NavBar = () => {
-  const [menu, setMenu] = useState(true);
-  const [display, setDisplay] = useState(true);
+class NavBar extends Component {
+  state = {
+    closeMenu: true,
+  };
 
-  function openMenu() {
-    setMenu(!menu);
-    setDisplay(!display);
+  toggleMenu = () => {
+    this.setState((state) => {
+      return { closeMenu: !state.closeMenu };
+    });
+  };
+
+  render() {
+    const { closeMenu } = this.state;
+    return (
+      <Nav className="nav">
+        <a href="https://github.com/reactjs" target="_blank" rel="noreferrer">
+          <Logo src={logo} alt="" />
+        </a>
+
+        <Container className="container">
+          <Ul>
+            <Li>
+              <Link href="">Home</Link>
+            </Li>
+            <Li>
+              <Link href="">GitHub List</Link>
+            </Li>
+          </Ul>
+          <Button>Login</Button>
+        </Container>
+
+        <ContainerMobile
+          className="containerMobile"
+          style={{
+            transform: closeMenu ? "translateX(100%)" : "translateX(0)",
+          }}
+        >
+          <Ul>
+            <Li>
+              <Link href="">Home</Link>
+            </Li>
+            <Li>
+              <Link href="">GitHub List</Link>
+            </Li>
+          </Ul>
+          <Button>Login</Button>
+        </ContainerMobile>
+
+        <ContainerBurgerMenu
+          className="ContainerBurgerMenu"
+          onClick={this.toggleMenu}
+        >
+          <BurgerMenu menu={closeMenu} />
+        </ContainerBurgerMenu>
+      </Nav>
+    );
   }
-
-  return (
-    <Nav className="nav">
-      <a href="https://github.com/reactjs" target="_blank" rel="noreferrer">
-        <Logo src={logo} alt="" />
-      </a>
-
-      <Container className="container">
-        <Ul>
-          <Li>
-            <Link href="">Home</Link>
-          </Li>
-          <Li>
-            <Link href="">GitHub List</Link>
-          </Li>
-        </Ul>
-        <Button>Login</Button>
-      </Container>
-
-      <ContainerMobile
-        className="containerMobile"
-        style={{ transform: display ? "translateX(100%)" : "translateX(0)" }}
-      >
-        <Ul>
-          <Li>
-            <Link href="">Home</Link>
-          </Li>
-          <Li>
-            <Link href="">GitHub List</Link>
-          </Li>
-        </Ul>
-        <Button>Login</Button>
-      </ContainerMobile>
-
-      <ContainerBurgerMenu className="ContainerBurgerMenu" onClick={openMenu}>
-        <BurgerMenu menu={menu} />
-      </ContainerBurgerMenu>
-    </Nav>
-  );
-};
+}
 
 export default NavBar;
