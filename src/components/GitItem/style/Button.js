@@ -15,6 +15,7 @@ const Button = styled(ButtonRounder)`
 `;
 
 const ButtonRepo = styled(Button)`
+  margin-right: 20px;
   @media screen and (max-width: 800px) {
     grid-column-start: 5;
     grid-column-end: 6;
