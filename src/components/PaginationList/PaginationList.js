@@ -24,13 +24,29 @@ const PaginationList = ({
   const { totalCount } = githubRepo;
 
   // Default one page = 30 results.
-  const maxPage = totalCount / 30;
+  const maxPage = Math.ceil(totalCount / 30);
 
   const linksPage = [];
 
-  //
-  if (page >= 3) {
+  // check the maximum number of pages received from API
+  if (page >= 3 && page < maxPage) {
     for (let i = page - 2; i < page + 3; i++) {
+      linksPage.push(i);
+    }
+  } else if (page + 1 > maxPage) {
+    for (let i = 1; i < page + 1; i++) {
+      linksPage.push(i);
+    }
+  } else if (page + 2 > maxPage) {
+    for (let i = 1; i < page + 2; i++) {
+      linksPage.push(i);
+    }
+  } else if (page + 3 > maxPage) {
+    for (let i = 1; i < page + 3; i++) {
+      linksPage.push(i);
+    }
+  } else if (page + 4 > maxPage) {
+    for (let i = 1; i < page + 4; i++) {
       linksPage.push(i);
     }
   } else {
@@ -46,14 +62,12 @@ const PaginationList = ({
       perPage,
       sortOfRepositories
     );
-    console.log(data);
     setGithubRepo(data);
   }
 
   function setPage(action) {
     const updatePage = 1;
     showMoreRepo(updatePage);
-
     if (action === "next") {
       let count = page + 1;
       setCurrentPage(count);
@@ -72,7 +86,7 @@ const PaginationList = ({
     page === 1 ? null : <Button onClick={() => setPage("prev")}>prev</Button>;
 
   const nextButton =
-    page === maxPage ? null : (
+    page > maxPage ? null : (
       <Button onClick={() => setPage("next")}>next</Button>
     );
 
