@@ -1,3 +1,4 @@
 import { uuid } from "./uuid";
-
-export { uuid };
+import { compose } from "./compose";
+import { paginationPages } from "./pagitanionPage";
+export { uuid, compose, paginationPages };

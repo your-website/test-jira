@@ -7,65 +7,35 @@ import {
   showMoreRepo,
 } from "../../actions";
 
-import GithubService from "../../services/GithubService";
-import { uuid } from "../../utils";
+import { uuid, compose, paginationPages } from "../../utils";
+import withRequestRepo from "../hoc/withRequestRepo";
 
 import { Button, Container, Paragraph } from "./style";
-// = ({
-//   currentPage,
-//   githubRepo,
-//   setCurrentPage,
-//   setGithubRepo,
-//   requestGitHubRepo,
-//   showMoreRepo,
-//   sortOfRepositories,
-// })
-class PaginationList extends Component {
-  async newRepositories(page, perPage) {
-    const { requestGitHubRepo, setGithubRepo, sortOfRepositories } = this.props;
-    requestGitHubRepo();
-    const data = await GithubService.getRepositories(
-      page,
-      perPage,
-      sortOfRepositories
-    );
-    setGithubRepo(data);
-  }
 
-  paginationPages(page, maxPage) {
-    const linksPage = [];
-    // check the maximum number of pages received from API
-    if (page >= 3 && page < maxPage) {
-      for (let i = page - 2; i < page + 3; i++) {
-        linksPage.push(i);
-      }
-    } else if (page + 1 > maxPage) {
-      for (let i = 1; i < page + 1; i++) {
-        linksPage.push(i);
-      }
-    } else if (page + 2 > maxPage) {
-      for (let i = 1; i < page + 2; i++) {
-        linksPage.push(i);
-      }
-    } else if (page + 3 > maxPage) {
-      for (let i = 1; i < page + 3; i++) {
-        linksPage.push(i);
-      }
-    } else if (page + 4 > maxPage) {
-      for (let i = 1; i < page + 4; i++) {
-        linksPage.push(i);
-      }
-    } else {
-      for (let i = 1; i < page + 5; i++) {
-        linksPage.push(i);
-      }
-    }
-    return linksPage;
+class PaginationList extends Component {
+  getNewRepo(count) {
+    const {
+      requestGitHubRepo,
+      setGithubRepo,
+      sortOfRepositories,
+      newRepositories,
+      currentPage: { perPage },
+    } = this.props;
+
+    // prop from withRequestRepo HOC
+    newRepositories(count, perPage, {
+      requestGitHubRepo,
+      setGithubRepo,
+      sortOfRepositories,
+    });
   }
 
   setPage(action) {
-    const { showMoreRepo, setCurrentPage } = this.props;
-    const { page, perPage } = this.props.currentPage.page;
+    const {
+      showMoreRepo,
+      setCurrentPage,
+      currentPage: { page },
+    } = this.props;
     const updatePage = 1;
 
     // show 10 repositories when person open new page
@@ -75,24 +45,24 @@ class PaginationList extends Component {
     if (action === "next") {
       let count = page + 1;
       setCurrentPage(count);
-      this.newRepositories(count, perPage);
+      this.getNewRepo(count);
     } else if (action === "prev") {
       let count = page - 1;
       setCurrentPage(count);
-      this.newRepositories(count, perPage);
+      this.getNewRepo(count);
     } else {
       setCurrentPage(action);
-      this.newRepositories(action, perPage);
+      this.getNewRepo(action);
     }
   }
 
   render() {
-    const { page } = this.props.currentPage;
-    const { totalCount } = this.props.githubRepo;
-    const maxPage = Math.ceil(totalCount / 30);
-    const linksPage = this.paginationPages(page, maxPage);
-
-    // Default one page = 30 results.
+    const {
+      currentPage: { page },
+      githubRepo: { totalCount },
+    } = this.props;
+    const maxPage = Math.ceil(totalCount / 30); // Default one page = 30 results.
+    const linksPage = paginationPages(page, maxPage);
 
     const prevButton =
       page === 1 ? null : (
@@ -150,4 +120,7 @@ const mapDispatchToProps = {
   showMoreRepo,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PaginationList);
+export default compose(
+  withRequestRepo(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(PaginationList);

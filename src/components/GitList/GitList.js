@@ -7,9 +7,9 @@ import {
   setGithubRepo,
 } from "../../actions";
 
-import GithubService from "../../services/GithubService";
-
 import { Container, ButtonShow, Paragraph, Span } from "./style";
+import { compose } from "../../utils";
+import withRequestRepo from "../hoc/withRequestRepo";
 
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
@@ -34,31 +34,34 @@ class GitList extends Component {
   }
 
   sortRepo = async (e) => {
-    const { currentPage, setGithubRepo, requestGitHubRepo } = this.props;
-    const value = e.target.textContent;
-    if (value === "default") {
-      this.setState(() => {
-        return { sortOfRepositories: null };
-      });
-    } else
-      this.setState(() => {
-        return { sortOfRepositories: value };
-      });
+    const {
+      currentPage,
+      setGithubRepo,
+      requestGitHubRepo,
+      newRepositories,
+    } = this.props;
 
-    requestGitHubRepo();
-    const data = await GithubService.getRepositories(
-      currentPage.page,
-      currentPage.perPage,
-      value
-    );
-    setGithubRepo(data);
+    const value = e.target.textContent;
+
+    if (value === "default") {
+      this.setState({ sortOfRepositories: null });
+    } else this.setState({ sortOfRepositories: value });
+
+    // prop from withRequestRepo HOC
+    newRepositories(currentPage.page, currentPage.perPage, {
+      requestGitHubRepo,
+      setGithubRepo,
+      sortOfRepositories: value,
+    });
   };
 
   render() {
     const { sortOfRepositories } = this.state;
-    const { githubRepo } = this.props;
+    const {
+      githubRepo: { data, loading, showMore },
+    } = this.props;
+
     // showMore - how many results to show. max 30 repPage
-    const { data, loading, showMore } = githubRepo;
     const showResults = data.slice(0, showMore * 10);
     const moreResults = showMore + 1;
     const hideResults = showMore - 2;
@@ -117,4 +120,7 @@ const mapDispatchToProps = {
   setGithubRepo,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GitList);
+export default compose(
+  withRequestRepo(),
+  connect(mapStateToProps, mapDispatchToProps)
+)(GitList);

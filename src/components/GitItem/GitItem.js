@@ -1,5 +1,6 @@
 import React from "react";
 import { URL } from "../../assets/CONST";
+import { uuid } from "../../utils";
 
 import {
   ButtonRepo,
@@ -25,9 +26,10 @@ function renderRepositories(data) {
     const { id, forks, name, size, watchers, owner } = ele;
     const { avatar_url, login } = owner;
     const linkUser = `${URL}/${login}`;
+    const key = uuid();
 
     return (
-      <Container key={id} className="gitItem">
+      <Container key={key} className="gitItem">
         <Img src={avatar_url} alt={name}></Img>
         <ContainerColumn>
           <ParagraphBold>id</ParagraphBold>
