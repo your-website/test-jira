@@ -12,9 +12,10 @@ const apiClient = axios.create({
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  getRepositories(page, perPage) {
+  getRepositories(page, perPage, sort) {
+    const sortRepo = sort === "default" || sort === null ? "" : `sort=${sort}&`;
     return apiClient.get(
-      `/search/repositories?q=page=${page}&per_page=${perPage}`
+      `/search/repositories?q=${sortRepo}page=${page}&per_page=${perPage}`
     );
   },
 };

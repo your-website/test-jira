@@ -18,6 +18,7 @@ const PaginationList = ({
   setGithubRepo,
   requestGitHubRepo,
   showMoreRepo,
+  sortOfRepositories,
 }) => {
   const { page, perPage } = currentPage;
   const { totalCount } = githubRepo;
@@ -40,7 +41,11 @@ const PaginationList = ({
 
   async function funcData(page, perPage) {
     requestGitHubRepo();
-    const data = await GithubService.getRepositories(page, perPage);
+    const data = await GithubService.getRepositories(
+      page,
+      perPage,
+      sortOfRepositories
+    );
     console.log(data);
     setGithubRepo(data);
   }

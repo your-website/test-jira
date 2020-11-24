@@ -1,13 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { showMoreRepo, loadingData } from "../../actions";
+import {
+  showMoreRepo,
+  loadingData,
+  requestGitHubRepo,
+  setGithubRepo,
+} from "../../actions";
 
-import { Container, ButtonShow } from "./style";
+import GithubService from "../../services/GithubService";
+
+import { Container, ButtonShow, Paragraph, Span } from "./style";
 
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
 
 class GitList extends Component {
+  state = {
+    sortOfRepositories: null,
+  };
+
   // maxValue no more than 30
   showOrHideDataInPage(maxValue, value, currentValue) {
     const { loadingData, showMoreRepo } = this.props;
@@ -22,7 +33,29 @@ class GitList extends Component {
     showMoreRepo(value);
   }
 
+  sortRepo = async (e) => {
+    const { currentPage, setGithubRepo, requestGitHubRepo } = this.props;
+    const value = e.target.textContent;
+    if (value === "default") {
+      this.setState(() => {
+        return { sortOfRepositories: null };
+      });
+    } else
+      this.setState(() => {
+        return { sortOfRepositories: value };
+      });
+
+    requestGitHubRepo();
+    const data = await GithubService.getRepositories(
+      currentPage.page,
+      currentPage.perPage,
+      value
+    );
+    setGithubRepo(data);
+  };
+
   render() {
+    const { sortOfRepositories } = this.state;
     const { githubRepo } = this.props;
     // showMore - how many results to show. max 30 repPage
     const { data, loading, showMore } = githubRepo;
@@ -49,13 +82,24 @@ class GitList extends Component {
       <div>
         <Container className="gitList">
           <h2>GitHub List Repositories</h2>
-          <p>
-            Sort of: <span>default</span>
-            <span>stars</span>
-          </p>
+          <Paragraph>
+            Sort of:{" "}
+            <Span
+              className={sortOfRepositories === null ? "active" : null}
+              onClick={this.sortRepo}
+            >
+              default
+            </Span>{" "}
+            <Span
+              className={sortOfRepositories ? "active" : null}
+              onClick={this.sortRepo}
+            >
+              stars
+            </Span>
+          </Paragraph>
           <GitItem loading={loading} data={showResults} />
           {Button}
-          <PaginationList />
+          <PaginationList sortOfRepositories={sortOfRepositories} />
         </Container>
       </div>
     );
@@ -69,6 +113,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
   showMoreRepo,
   loadingData,
+  requestGitHubRepo,
+  setGithubRepo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GitList);

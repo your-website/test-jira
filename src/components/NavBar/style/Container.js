@@ -7,14 +7,10 @@ const Container = styled.div.attrs((props) => ({
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  transition: transform 0.7s ease;
   transform: translateX(0);
 
   @media screen and (max-width: 500px) {
-    display: none;
-  }
-
-  @media screen and (max-width: 500px) {
+    transition: transform 0.7s ease;
     transform: translateX(100%);
     position: absolute;
     top: 0;
