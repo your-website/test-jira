@@ -1,14 +1,15 @@
 import React from "react";
+
 import {
-  Paragraph,
-  Container,
-  Img,
-  Test,
-  ParagraphBold,
-  Link,
   ButtonRepo,
   ButtonAbout,
-} from "./styles_GitItem";
+  Paragraph,
+  ParagraphBold,
+  Img,
+  Container,
+  ContainerColumn,
+  Link,
+} from "./style";
 
 const GitItem = ({ loading, githubRepoData, countRepo }) => {
   const test = githubRepoData.map((ele) => {
@@ -19,26 +20,26 @@ const GitItem = ({ loading, githubRepoData, countRepo }) => {
     return (
       <Container key={id} className="gitItem">
         <Img src={avatar_url} alt={name}></Img>
-        <Test>
+        <ContainerColumn>
           <ParagraphBold>id</ParagraphBold>
           <Paragraph>{id}</Paragraph>
-        </Test>
-        <Test>
+        </ContainerColumn>
+        <ContainerColumn>
           <ParagraphBold>forks</ParagraphBold>
           <Paragraph>{forks}</Paragraph>
-        </Test>
-        <Test>
+        </ContainerColumn>
+        <ContainerColumn>
           <ParagraphBold>size</ParagraphBold>
           <Paragraph>{size}</Paragraph>
-        </Test>
-        <Test>
+        </ContainerColumn>
+        <ContainerColumn>
           <ParagraphBold>watchers</ParagraphBold>
           <Paragraph>{watchers}</Paragraph>
-        </Test>
-        <Test>
+        </ContainerColumn>
+        <ContainerColumn>
           <ParagraphBold>login</ParagraphBold>
           <Paragraph>{login}</Paragraph>
-        </Test>
+        </ContainerColumn>
         <ButtonAbout>Show more</ButtonAbout>
         <ButtonRepo>
           <Link href={linkUser}>Repositories</Link>

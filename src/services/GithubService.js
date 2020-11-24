@@ -12,6 +12,8 @@ const apiClient = axios.create({
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   getRepositories(page, perPage) {
-    return apiClient.get(`/search/repositories?q=page=${page}`);
+    return apiClient.get(
+      `/search/repositories?q=page=${page}&per_page=${perPage}`
+    );
   },
 };

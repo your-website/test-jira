@@ -8,7 +8,7 @@ import {
 } from "../../actions";
 import GithubService from "../../services/GithubService";
 
-import { Container, Button, Paragraph } from "./styles_Pagination";
+import { Button, Container, Paragraph } from "./style";
 
 const PaginationList = ({
   currentPage,

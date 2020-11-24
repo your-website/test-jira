@@ -1,12 +1,13 @@
 import styled from "styled-components";
 
 const Footer = styled.footer`
-  margin: 0;
-  background: #282c34;
-  height: 10vh;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  margin: 0;
+  background: #282c34;
+  height: 10vh;
 `;
 
 const Paragraph = styled.p`

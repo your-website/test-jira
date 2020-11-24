@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+
 import {
   Nav,
-  Logo,
-  Li,
-  Link,
-  Ul,
-  LinkLogo,
-  Button,
   Container,
   ContainerBurgerMenu,
-} from "./styles_NavBar";
+  Button,
+  Link,
+  Logo,
+  Li,
+  Ul,
+} from "./style";
 
 import logo from "../../static/logo.svg";
 import BurgerMenu from "../BurgerMenu";
@@ -25,9 +25,9 @@ const NavBar = () => {
 
   return (
     <Nav className="nav">
-      <LinkLogo href="">
+      <a href="https://github.com/reactjs" target="_blank" rel="noreferrer">
         <Logo src={logo} alt="" />
-      </LinkLogo>
+      </a>
       <Container
         className="container"
         asd

@@ -21,4 +21,15 @@ const ButtonShadow = styled(Button)`
   }
 `;
 
-export { Button, ButtonShadow };
+const ButtonRounder = styled(Button)`
+  border-radius: 15px;
+  background-color: #fff;
+  transition: all 0.1s ease;
+
+  &:hover {
+    background-color: rgb(236 247 255);
+    border: 1px solid #fff;
+  }
+`;
+
+export { Button, ButtonShadow, ButtonRounder };

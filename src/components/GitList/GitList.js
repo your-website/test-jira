@@ -1,10 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Container, ButtonShow } from "./styles_GitList";
+import { Container, ButtonShow } from "./style";
 
 import GitItem from "../GitItem";
 import PaginationList from "../PaginationList";
-import GithubService from "../../services/GithubService";
 import { showMoreRepo, loadingData } from "../../actions";
 
 const GitList = ({ githubRepo, showMoreRepo, loadingData }) => {
