@@ -4,6 +4,7 @@ import {
   Nav,
   Container,
   ContainerBurgerMenu,
+  ContainerMobile,
   Button,
   Link,
   Logo,
@@ -28,9 +29,21 @@ const NavBar = () => {
       <a href="https://github.com/reactjs" target="_blank" rel="noreferrer">
         <Logo src={logo} alt="" />
       </a>
-      <Container
-        className="container"
-        asd
+
+      <Container className="container">
+        <Ul>
+          <Li>
+            <Link href="">Home</Link>
+          </Li>
+          <Li>
+            <Link href="">GitHub List</Link>
+          </Li>
+        </Ul>
+        <Button>Login</Button>
+      </Container>
+
+      <ContainerMobile
+        className="containerMobile"
         style={{ transform: display ? "translateX(100%)" : "translateX(0)" }}
       >
         <Ul>
@@ -42,7 +55,8 @@ const NavBar = () => {
           </Li>
         </Ul>
         <Button>Login</Button>
-      </Container>
+      </ContainerMobile>
+
       <ContainerBurgerMenu className="ContainerBurgerMenu" onClick={openMenu}>
         <BurgerMenu menu={menu} />
       </ContainerBurgerMenu>
