@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../assets/CONST";
 
 const apiClient = axios.create({
-  baseURL: "https://api.github.com",
+  baseURL: API_URL,
   withCredentials: false,
   headers: {
     Accept: "application/json",

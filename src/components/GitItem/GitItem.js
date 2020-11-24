@@ -1,4 +1,5 @@
 import React from "react";
+import { URL } from "../../assets/CONST";
 
 import {
   ButtonRepo,
@@ -23,7 +24,7 @@ function renderRepositories(data) {
   const page = data.map((ele) => {
     const { id, forks, name, size, watchers, owner } = ele;
     const { avatar_url, login } = owner;
-    const linkUser = `https://github.com/${login}`;
+    const linkUser = `${URL}/${login}`;
 
     return (
       <Container key={id} className="gitItem">
