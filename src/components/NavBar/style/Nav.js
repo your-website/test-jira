@@ -4,7 +4,7 @@ const Nav = styled.nav`
   position: relative;
   display: flex;
   align-items: center;
-  height: 10vh;
+  height: 90px;
   background: rgb(11, 69, 70);
   background: linear-gradient(
     45deg,
@@ -14,7 +14,7 @@ const Nav = styled.nav`
   padding: 0 20px;
 
   @media screen and (max-width: 500px) {
-    height: 15vh;
+    height: 125px;
   }
 `;
 

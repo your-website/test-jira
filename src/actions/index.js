@@ -1,9 +1,9 @@
 const setGithubRepo = (newRepo) => {
   const { data } = newRepo;
-  const { items } = data;
+  const { items, total_count } = data;
   return {
     type: "SET_GITHUB_REPO",
-    payload: items,
+    payload: { items, total_count },
   };
 };
 

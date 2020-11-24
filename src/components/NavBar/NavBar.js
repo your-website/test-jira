@@ -4,7 +4,6 @@ import {
   Nav,
   Container,
   ContainerBurgerMenu,
-  ContainerMobile,
   Button,
   Link,
   Logo,
@@ -34,7 +33,7 @@ class NavBar extends Component {
           <Logo src={logo} alt="" />
         </a>
 
-        <Container className="container">
+        <Container className={closeMenu ? "container" : "container active"}>
           <Ul>
             <Li>
               <Link href="">Home</Link>
@@ -45,23 +44,6 @@ class NavBar extends Component {
           </Ul>
           <Button>Login</Button>
         </Container>
-
-        <ContainerMobile
-          className="containerMobile"
-          style={{
-            transform: closeMenu ? "translateX(100%)" : "translateX(0)",
-          }}
-        >
-          <Ul>
-            <Li>
-              <Link href="">Home</Link>
-            </Li>
-            <Li>
-              <Link href="">GitHub List</Link>
-            </Li>
-          </Ul>
-          <Button>Login</Button>
-        </ContainerMobile>
 
         <ContainerBurgerMenu
           className="ContainerBurgerMenu"

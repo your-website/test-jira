@@ -3,6 +3,7 @@ const githubRepo = (state, action) => {
     return {
       loading: false,
       showMore: 1,
+      totalCount: 12,
       data: [
         {
           id: 876667,
@@ -23,8 +24,9 @@ const githubRepo = (state, action) => {
     case "SET_GITHUB_REPO":
       return {
         loading: false,
-        data: action.payload,
+        data: action.payload.items,
         showMore: state.githubRepo.showMore,
+        totalCount: action.payload.total_count,
       };
 
     case "REQUEST_GITHUB_REPO":
@@ -32,6 +34,7 @@ const githubRepo = (state, action) => {
         loading: true,
         data: state.githubRepo.data,
         showMore: state.githubRepo.showMore,
+        totalCount: state.githubRepo.totalCount,
       };
 
     case "SHOW_MORE_REPO":
@@ -39,6 +42,7 @@ const githubRepo = (state, action) => {
         loading: false,
         data: state.githubRepo.data,
         showMore: action.payload,
+        totalCount: state.githubRepo.totalCount,
       };
 
     case "LOADING_DATA":
@@ -46,6 +50,7 @@ const githubRepo = (state, action) => {
         loading: true,
         data: state.githubRepo.data,
         showMore: state.githubRepo.showMore,
+        totalCount: state.githubRepo.totalCount,
       };
 
     default:
