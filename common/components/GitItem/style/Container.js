@@ -24,7 +24,7 @@ const Container = styled.div`
   );
 
   @media screen and (max-width: 800px) {
-    grid-template-columns: 120px repeat(4, 1fr);
+    grid-template-columns: 140px repeat(4, 1fr);
     grid-template-rows: 60px 60px;
   }
 

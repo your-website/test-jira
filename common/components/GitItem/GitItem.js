@@ -12,7 +12,13 @@ import {
   Link,
 } from "./style";
 
-const GitItem = ({ loading, data }) => {
+import PopUp from '../PopUp'
+
+const GitItem = ({ setPopUp, loading, data, openPopUp }) => {
+  function openOrClosePopUp(e) {
+    setPopUp(e.target.id)
+  }
+
   function renderRepositories(data) {
     const page = data.map((ele) => {
       const { id, forks, name, size, watchers, owner } = ele;
@@ -42,7 +48,7 @@ const GitItem = ({ loading, data }) => {
             <ParagraphBold>login</ParagraphBold>
             <Paragraph>{login}</Paragraph>
           </ContainerColumn>
-          <ButtonAbout>Show more</ButtonAbout>
+          <ButtonAbout id={id} onClick={openOrClosePopUp} >Show more</ButtonAbout>
           <ButtonRepo>
             <Link href={linkUser}>Repositories</Link>
           </ButtonRepo>
@@ -53,10 +59,18 @@ const GitItem = ({ loading, data }) => {
     return page;
   }
 
+  function itemId() {
+    const result = data.find(ele => ele.id === +openPopUp)
+    return result
+  }
+
+  const popUpData = openPopUp !== null ? itemId() : null;
+  const content = openPopUp !== null ? <PopUp setPopUp={setPopUp} data={popUpData} /> : null;
+
   if (loading) {
     return <p>loading</p>;
   } else {
-    return <div>{renderRepositories(data)}</div>;
+    return (<div>{renderRepositories(data)} {content}</div>);
   }
 };
 

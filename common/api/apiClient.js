@@ -11,8 +11,6 @@ const apiClient = axios.create({
 
 export default {
   getRepositories(page, perPage, sort) {
-    console.log('sort')
-    console.log(sort)
     const sortRepo = sort === 'default' || sort === null ? '' : `sort=${sort}&`
     return apiClient.get(
       `/search/repositories?q=${sortRepo}page=${page}&per_page=${perPage}`

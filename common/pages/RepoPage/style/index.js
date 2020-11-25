@@ -1,6 +1,5 @@
-import React from "react";
-
 import styled from "styled-components";
+import { DefaultLink } from '../../../assets/styled'
 
 const Container = styled.div`
   display: flex;
@@ -15,14 +14,14 @@ const Container = styled.div`
   }
 `;
 
-export { Container };
+const LinkRepo = styled(DefaultLink)`
+    color: #4e4a4a;
+    transition: color 0.2s ease;
 
-const HomePage = () => {
-  return (
-    <Container>
-      <h1>Home Page</h1>
-    </Container>
-  );
-};
+    &:hover {
+        color: black;
+        text-decoration: underline;
+    }
+`
 
-export default HomePage;
+export { Container, LinkRepo }

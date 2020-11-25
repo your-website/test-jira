@@ -12,10 +12,10 @@ import PaginationList from '../PaginationList'
 
 import { Container, ButtonShow, Paragraph, Span } from "./style";
 
-const GitList = ({ repositories, page, setPageResultsHtml, setLoadingPage, perPageResults, pageId, setRepo, requestNewRepositories }) => {
+const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingPage, perPageResults, pageId, setRepo, requestNewRepositories }) => {
   const [sortOfRep, setSortOfRep] = useState(null)
   const { items } = repositories;
-  const { loading, pageResultsHtml } = page;
+  const { loading, pageResultsHtml, openPopUp } = page;
 
   // maxValue no more than 30
   function showOrHideDataInPage(maxValue, value, currentValue) {
@@ -45,6 +45,8 @@ const GitList = ({ repositories, page, setPageResultsHtml, setLoadingPage, perPa
       sortOfRep: value,
     });
   };
+
+
 
   const showResults = items.slice(0, pageResultsHtml * 10);
   const moreResults = pageResultsHtml + 1;
@@ -83,7 +85,7 @@ const GitList = ({ repositories, page, setPageResultsHtml, setLoadingPage, perPa
           stars
             </Span>
       </Paragraph>
-      <GitItem loading={loading} data={showResults} />
+      <GitItem setPopUp={setPopUp} openPopUp={openPopUp} loading={loading} data={showResults} />
       {Button}
       <PaginationList
         pageId={pageId}

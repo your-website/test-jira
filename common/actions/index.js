@@ -2,6 +2,7 @@ export const SET_REPOSITORIES = 'SET_REPOSITORIES'
 export const SET_PAGE = 'SET_PAGE'
 export const SET_LOADING_PAGE = 'SET_LOADING_PAGE'
 export const SET_PAGE_RESULTS_HTML = 'SET_PAGE_RESULTS_HTML'
+export const SET_POPUP = 'SET_POPUP';
 
 export const setRepo = value => ({
   type: SET_REPOSITORIES,
@@ -20,5 +21,10 @@ export const setLoadingPage = (value) => ({
 
 export const setPageResultsHtml = (value) => ({
   type: SET_PAGE_RESULTS_HTML,
+  payload: value
+})
+
+export const setPopUp = (value) => ({
+  type: SET_POPUP,
   payload: value
 })
