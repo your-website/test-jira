@@ -14,7 +14,7 @@ import { Provider } from 'react-redux'
 import configureStore from '../common/store/configureStore'
 import App from '../common/containers/App'
 import { getRep } from '../common/api/apiClient'
-import { StaticRouter, BrowserRouter, Route } from "react-router-dom";
+import { StaticRouter } from "react-router-dom";
 
 const app = new Express()
 const port = 3000

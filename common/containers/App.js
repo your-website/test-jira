@@ -1,6 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Route } from "react-router-dom";
-import { StaticRouter } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 import FooterPage from '../components/FooterPage'
 import NavBar from '../components/NavBar';
