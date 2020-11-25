@@ -4,9 +4,9 @@
 > npm install
 ```
 
-> npm run build (production)
+> npm run build (production) "webpack"
 
-> npm run start (development)
+> npm run start (development) "node server/index.js"
 
 > npm run deploy (deploy на GitHubPages - когда есть build)
 
