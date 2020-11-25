@@ -1,5 +1,4 @@
 import React from "react";
-import Counter from '../../components/Counter'
 import styled from "styled-components";
 import { DefaultLink } from '../../assets/styled'
 const Container = styled.div`
