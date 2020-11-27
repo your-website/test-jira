@@ -34,26 +34,26 @@ app.use(webpackHotMiddleware(compiler));
 
 const handleRender = (req, res) => {
   // Query our mock API asynchronously
-  testFetch((asd) => {
+  getRep((repositories) => {
     // Compile an initial state
 
-    const repositories = {
-      total_count: 12,
-      items: [
-        {
-          id: 123,
-          forks: 12,
-          name: "roman",
-          size: 23,
-          watchers: 35,
-          owner: {
-            avatar_url:
-              "https://www.kinonews.ru/insimgs/poster/poster9623_1.jpg",
-            login: "kotin",
-          },
-        },
-      ],
-    };
+    // const repositories = {
+    //   total_count: 12,
+    //   items: [
+    //     {
+    //       id: 123,
+    //       forks: 12,
+    //       name: "roman",
+    //       size: 23,
+    //       watchers: 35,
+    //       owner: {
+    //         avatar_url:
+    //           "https://www.kinonews.ru/insimgs/poster/poster9623_1.jpg",
+    //         login: "kotin",
+    //       },
+    //     },
+    //   ],
+    // };
 
     const preloadedState = { repositories };
     // Create a new Redux store instance
