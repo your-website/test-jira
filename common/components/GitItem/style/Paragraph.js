@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const Paragraph = styled.p`
-  color: white;
+  color: #000;
   margin: 0;
 `;
 

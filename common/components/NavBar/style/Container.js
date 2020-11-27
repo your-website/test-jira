@@ -12,14 +12,14 @@ const Container = styled.div.attrs((props) => ({
   @media screen and (max-width: 500px) {
     transition: transform 0.7s ease;
     transform: translateX(100%);
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: space-around;
+    justify-content: space-around;
 
     background-color: #0b4546;
     height: 100vh;
@@ -32,7 +32,7 @@ const Container = styled.div.attrs((props) => ({
 `;
 
 const ContainerBurgerMenu = styled.div`
-  position: absolute;
+  position: fixed;
   display: none;
   top: 35px;
   right: 30px;

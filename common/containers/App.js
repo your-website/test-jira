@@ -1,16 +1,19 @@
-import React from 'react'
+import React from "react";
 import { Route } from "react-router-dom";
 
-import FooterPage from '../components/FooterPage'
-import NavBar from '../components/NavBar';
-import HomePage from '../pages/HomePage';
-import RepoPage from '../pages/RepoPage';
-import GitList from '../components/GitList';
+import { GlobalStyle } from "../assets/styled";
 
+import FooterPage from "../components/FooterPage";
+import NavBar from "../components/NavBar";
+import HomePage from "../pages/HomePage";
+import RepoPage from "../pages/RepoPage";
+import GitList from "../components/GitList";
 function App() {
   return (
     <div>
-      <NavBar />
+      <header>
+        <NavBar />
+      </header>
       <main>
         <Route path="/" component={HomePage} exact />
         <Route path="/api" component={RepoPage} exact />
@@ -23,8 +26,9 @@ function App() {
         />
       </main>
       <FooterPage />
+      <GlobalStyle />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

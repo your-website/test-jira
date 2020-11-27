@@ -19,8 +19,8 @@ const Container = styled.div`
   background: rgb(156, 177, 193);
   background: linear-gradient(
     45deg,
-    rgba(11, 97, 119, 1) 0%,
-    rgba(77, 116, 116, 1) 100%
+    rgb(255 255 255) 0%,
+    rgb(206 236 236) 100%
   );
 
   @media screen and (max-width: 800px) {

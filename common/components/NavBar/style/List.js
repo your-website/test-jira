@@ -5,7 +5,7 @@ const Li = styled.li`
   margin-left: 1rem;
 
   @media screen and (max-width: 500px) {
-    margin: 0;
+    margin: 3rem 0;
   }
 `;
 

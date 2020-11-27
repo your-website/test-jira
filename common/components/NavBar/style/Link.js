@@ -6,13 +6,10 @@ const NavLink = styled(Link)`
   color: white;
   font-size: 18px;
   font-weight: bold;
+  margin-left: 1rem;
 
   &:hover {
     border-bottom: 2px solid white;
-  }
-
-  @media screen and (max-width: 500px) {
-    font-size: calc(10px + 1vmin);
   }
 `;
 

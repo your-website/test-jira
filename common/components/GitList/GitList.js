@@ -1,19 +1,29 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux'
-import * as Actions from '../../actions'
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
 
 import { compose } from "../../utils";
 import withRequestRepo from "../hoc/withRequestRepo";
 import { withRouter } from "react-router-dom";
 
-import GitItem from '../GitItem'
-import PaginationList from '../PaginationList'
+import GitItem from "../GitItem";
+import PaginationList from "../PaginationList";
 
-import { Container, ButtonShow, Paragraph, Span } from "./style";
+import { Container, ButtonShow, Paragraph, Span, ContentTitle } from "./style";
 
-const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingPage, perPageResults, pageId, setRepo, requestNewRepositories }) => {
-  const [sortOfRep, setSortOfRep] = useState(null)
+const GitList = ({
+  repositories,
+  page,
+  setPopUp,
+  setPageResultsHtml,
+  setLoadingPage,
+  perPageResults,
+  pageId,
+  setRepo,
+  requestNewRepositories,
+}) => {
+  const [sortOfRep, setSortOfRep] = useState(null);
   const { items } = repositories;
   const { loading, pageResultsHtml, openPopUp } = page;
 
@@ -35,7 +45,7 @@ const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingP
     const value = e.target.textContent;
 
     if (value === "default") {
-      setSortOfRep(null)
+      setSortOfRep(null);
     } else setSortOfRep(value);
 
     // prop from withRequestRepo HOC
@@ -44,9 +54,7 @@ const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingP
       setRepo,
       sortOfRep: value,
     });
-  };
-
-
+  }
 
   const showResults = items.slice(0, pageResultsHtml * 10);
   const moreResults = pageResultsHtml + 1;
@@ -60,16 +68,16 @@ const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingP
         Show more
       </ButtonShow>
     ) : (
-        <ButtonShow
-          onClick={() => showOrHideDataInPage(1, hideResults, pageResultsHtml)}
-        >
-          Hide
-        </ButtonShow>
-      );
+      <ButtonShow
+        onClick={() => showOrHideDataInPage(1, hideResults, pageResultsHtml)}
+      >
+        Hide
+      </ButtonShow>
+    );
 
   return (
     <Container className="gitList">
-      <h2>GitHub List Repositories</h2>
+      <ContentTitle>GitHub List Repositories</ContentTitle>
       <Paragraph>
         Sort of:{" "}
         <Span
@@ -77,32 +85,31 @@ const GitList = ({ repositories, page, setPopUp, setPageResultsHtml, setLoadingP
           onClick={sortRepo}
         >
           default
-            </Span>{" "}
-        <Span
-          className={sortOfRep ? "active" : null}
-          onClick={sortRepo}
-        >
+        </Span>{" "}
+        <Span className={sortOfRep ? "active" : null} onClick={sortRepo}>
           stars
-            </Span>
+        </Span>
       </Paragraph>
-      <GitItem setPopUp={setPopUp} openPopUp={openPopUp} loading={loading} data={showResults} />
-      {Button}
-      <PaginationList
-        pageId={pageId}
-        sortOfRep={sortOfRep}
+      <GitItem
+        setPopUp={setPopUp}
+        openPopUp={openPopUp}
+        loading={loading}
+        data={showResults}
       />
+      {Button}
+      <PaginationList pageId={pageId} sortOfRep={sortOfRep} />
     </Container>
   );
-}
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   repositories: state.repositories,
-  page: state.page
-})
+  page: state.page,
+});
 
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(Actions, dispatch)
-}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(Actions, dispatch);
+};
 
 export default compose(
   withRequestRepo(),

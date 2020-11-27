@@ -1,6 +1,20 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    overflow-x: hidden;
+    font-family: 'Lato', sans-serif;
+  }
+`;
+
 const Button = styled.button`
   font-size: 16px;
   border: 1px solid black;
@@ -48,4 +62,21 @@ const DefaultLink = styled(Link)`
   }
 `;
 
-export { Button, ButtonShadow, ButtonRounder, DefaultLink };
+const H1 = styled.h1`
+  margin: 1rem 0;
+  color: rgb(64, 64, 64);
+`;
+
+const H2 = styled.h2`
+  color: rgb(64, 64, 64);
+`;
+
+export {
+  H2,
+  H1,
+  Button,
+  ButtonShadow,
+  ButtonRounder,
+  DefaultLink,
+  GlobalStyle,
+};
